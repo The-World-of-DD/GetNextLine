@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dierojas <dierojas@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/02/03 22:20:13 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/02/17 19:18:24 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ char    *get_next_line(int fd)
 //Tiene un comportamiento indeterminado cuando se cambia el fd
 //Comportamiento indeterminado cuando es un archivo binario
 //¿Que es un archivo binario? xddddd
-

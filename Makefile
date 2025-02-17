@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dierojas <dierojas@student.42madrid.com    +#+  +:+       +#+         #
+#    By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/03 21:21:44 by dierojas          #+#    #+#              #
-#    Updated: 2025/02/03 21:32:01 by dierojas         ###   ########.fr        #
+#    Updated: 2025/02/17 11:24:35 by dierojas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
