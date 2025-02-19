@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:35:08 by dierojas          #+#    #+#             */
-/*   Updated: 2025/02/19 10:20:56 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/02/19 10:51:44 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,33 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	s3[i] = '\0';
 	return (s3);
+}
+
+char	*ft_strcpy(char *dst, const char *src)
+{
+	size_t	i;
+
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*str;
+	size_t	i;
+
+	if (!s1)
+		return (NULL);
+	i = ft_strlen(s1) + 1;
+	str = malloc(i);
+	if (!str)
+		return (NULL);
+	ft_strcpy(str, s1);
+	return (str);
 }

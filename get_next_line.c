@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/02/18 09:47:16 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/02/19 10:56:49 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 
 char    *get_next_line(int fd)
 {
-    static char	*the_line;
-    return (the_line);
+    static char	buff[BUFFER_SIZE + 1];
 }
 
 //RESERVA DE MEMORIA DE LO QUE TENGAMOS QUE HACER
