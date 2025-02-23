@@ -3,39 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
+/*   By: dierojas <dierojas@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/02/19 10:56:49 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/02/23 22:52:29 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-//tengo que ver como utilizo este coso sin que me pegue un tiro
-//static char	*the_line;
-
 char    *get_next_line(int fd)
 {
-    static char	buff[BUFFER_SIZE + 1];
+    static char	*buff;
+	static char	*aux;
+	char	*gnl;
+	ssize_t	readed;
+
+	           aux = ft_strdup("");
+	//aqyi hacemos que se lea el tema, que no sera hasta que encuentre \n o encuentre eof (== 0)
+	while (1)
+	{
+		if (readed == -1)
+			return (free(buff), NULL);
+		if (!buff)
+			return (free(buff), NULL);
+		readed = read(fd, buff, BUFFER_SIZE);
+		break;
+	}
+	
+//Necesitamos leer el buffer y copiarlo en aux--> El buffer hay que liberarlo cada vez que se utiliza
+
+	gnl = malloc(ft_strlen(aux) + 1);
+	if (!gnl)
+		return (NULL);
+	return (gnl);
 }
 
-//RESERVA DE MEMORIA DE LO QUE TENGAMOS QUE HACER
-
-//habra que contar los caracteres para reservar con malloc lo que se va a imprimir
-//tenemos que ver que en funcion de como se imprima se reserva?? 
-//---> COmo interacciona con el biffer¿?¿?¿?
-
-//DE ALGUNA MANERA, TENDREMOS QUE IR LEYENDO Y PASANDOSELO 
-
-//que lo imprima de alguna manera
-//debe de leer la linea hasta que encuentre un \n
-
-//que sea capaz de saltar a la siguiente linea con las condiciones de:
-// -> Si no hay error || no hay nada que leer = NULL
-//el buffer es variable, hay que tener cierta antelacion
-//--> Tengo que ver como juego con el BufferSize
-
-//Tiene un comportamiento indeterminado cuando se cambia el fd
-//Comportamiento indeterminado cuando es un archivo binario
-//¿Que es un archivo binario? xddddd
+#include <fcntl.h>
+int main ()
+{
+    int fd = open("texto.txt", O_RDONLY);
+    if (fd == -1)
+    {
+        write(1, "Error al abrir el archivo", 25);
+        return 1;
+    }
+} 
