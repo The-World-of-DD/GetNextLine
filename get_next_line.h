@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dierojas <dierojas@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:29 by dierojas          #+#    #+#             */
-/*   Updated: 2025/02/24 21:10:31 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:46:42 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strcpy(char *dst, const char *src);
 char	*ft_strdup(const char *s1);
+char	*ft_trash_management(char *aux);
 
 #endif
