@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
+/*   By: dierojas <dierojas@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:35:08 by dierojas          #+#    #+#             */
-/*   Updated: 2025/02/19 10:51:44 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/02/24 22:06:11 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

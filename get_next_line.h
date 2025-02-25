@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
+/*   By: dierojas <dierojas@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:29 by dierojas          #+#    #+#             */
-/*   Updated: 2025/02/19 10:53:30 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:10:31 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *str);
