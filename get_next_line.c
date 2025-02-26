@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/02/26 02:20:59 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:59:36 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*ft_trash_management(char *aux)
 		while (aux[i] != '\n')
 			i++;
 		if (aux[i] == '\n')
-			ft_strdup(ft_strchr(aux, '\n') + 1),
+			ft_strdup(ft_strchr(aux, '\n') + 1);
 	}
 	return (rest);
 }
