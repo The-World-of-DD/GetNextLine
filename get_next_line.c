@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/02/26 20:50:42 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/04 19:57:00 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,34 @@
 
 char    *get_next_line(int fd)
 {
-	static char	*buff;
+	char		*buff;
 	char		*aux;
-	char		*rest;
+	static char	*rest;
 	char		*gnl;
 	ssize_t		readed;
 
-	buff = NULL;
 	aux = NULL;
-	rest = NULL;
-	gnl = NULL;
-	readed = 0;
 	if ((BUFFER_SIZE <= 0) || fd < 0)
 		return (NULL);
-	//buffer read process//
-	while ((readed == read(fd, buff, BUFFER_SIZE)) > 0)
+	buff = malloc(BUFFER_SIZE + 1);
+	if (!buff)
+		return (NULL);
+	readed = read(fd, buff, BUFFER_SIZE);
+	if (readed <= -1)
+		return (free(buff), NULL);
+	//buffer read process and aux fill//
+	while (readed > 0)
 	{
-		if (!buff)
-			return (free(buff), NULL);
-		if (readed <= -1)
-			return (free(buff), NULL);
-		ft_strjoin(aux, buff);
+		aux = ft_strjoin(aux, buff);
+		if (ft_strchr(buff, '\n'))
+		{
+			ft_strjoin(rest, buff);
+			break;
+		}
+		readed = read(fd, buff, BUFFER_SIZE);
 	}
+	free (buff);
+	return (aux);
 }
 
 int main ()
@@ -46,6 +52,12 @@ int main ()
         perror("Error al abrir el archivo");
         return 1;
     }
-	get_next_line(fd);
+	char	*line = get_next_line(fd);
+	if (line)
+	{
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
 	return 0;
 } 
