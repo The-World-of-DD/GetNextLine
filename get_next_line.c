@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/05 16:43:18 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/06 10:55:23 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char    *get_next_line(int fd)
 {
 	char		*buff;
-	char		*aux;
-	static char	*rest;
+	char		*gnl;
+	static char	*aux;
 	ssize_t		readed;
 
 	aux = NULL;
@@ -31,30 +31,33 @@ char    *get_next_line(int fd)
 	//buffer read process and aux fill//
 	while (readed > 0)
 	{
-		aux = ft_strjoin(ft_strdup(""), buff);//ponmos el "" porque asi no inicializamos
 		if (ft_strchr(buff, '\n'))
 		{
-			rest = ft_strjoin(rest, buff);
+			aux = ft_strjoin(aux, buff);
 			break;
 		}
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
+	if (!aux)
+		return(NULL);
+	gnl = ft_ext_line(aux);
+	aux = ft_update_aux();
 	free(buff);
-	return(ft_strim_gnl(aux, rest));
+	return(gnl);
 }
-char	*ft_strim_gnl(char *aux, char *rest)
+/* char	*ft_strim_gnl(char *aux, char *rest)
 {
 	char	*gnl;
 	size_t	len;
 	size_t	end;
 	size_t	start;
 
-	if (!aux || !aux && !rest)//que pasa si el resto es nulo¿?¿?
+	if (!aux || !aux && !rest)
 		return (NULL);
 	start = 0;
 	while (aux[start])
 	{
-		/* code */
+	
 	}
 	return (gnl);
 }
@@ -99,3 +102,4 @@ int main ()
 	close(fd);
 	return 0;
 } 
+ */
