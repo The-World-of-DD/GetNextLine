@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
+/*   By: dierojas <dierojas@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/06 10:55:23 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/06 18:53:34 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,14 @@ char    *get_next_line(int fd)
 	if (!aux)
 		return(NULL);
 	gnl = ft_ext_line(aux);
-	aux = ft_update_aux();
+	aux = ft_update_aux(aux);
 	free(buff);
 	return(gnl);
+}
+
+char	*ft_ext_line(char *aux)
+{
+	
 }
 /* char	*ft_strim_gnl(char *aux, char *rest)
 {
