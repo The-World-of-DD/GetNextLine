@@ -6,7 +6,7 @@
 /*   By: dierojas <dierojas@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/06 18:53:34 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:16:56 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char    *get_next_line(int fd)
 	static char	*aux;
 	ssize_t		readed;
 
-	aux = NULL;
+	aux = ft_strdup("");
 	if ((BUFFER_SIZE <= 0) || fd < 0)
 		return (NULL);
 	buff = malloc(BUFFER_SIZE + 1);
@@ -31,63 +31,70 @@ char    *get_next_line(int fd)
 	//buffer read process and aux fill//
 	while (readed > 0)
 	{
-		if (ft_strchr(buff, '\n'))
-		{
-			aux = ft_strjoin(aux, buff);
+		aux = ft_strjoin(aux, buff);
+		if (ft_strchr(buff, '\n') || EOF)
 			break;
-		}
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
 	if (!aux)
 		return(NULL);
-	gnl = ft_ext_line(aux);
-	aux = ft_update_aux(aux);
+	gnl = ft_extract_line(aux);
+	aux = ft_update_aux(aux, gnl);
 	free(buff);
+	free(aux);
 	return(gnl);
 }
 
-char	*ft_ext_line(char *aux)
+char	*ft_extract_line(char *aux)//dado el parametro de un string, recorta todo lo que haya antes de un \n
 {
-	
-}
-/* char	*ft_strim_gnl(char *aux, char *rest)
-{
-	char	*gnl;
-	size_t	len;
-	size_t	end;
-	size_t	start;
-
-	if (!aux || !aux && !rest)
-		return (NULL);
-	start = 0;
-	while (aux[start])
-	{
-	
-	}
-	return (gnl);
-}
-char	*ft_nullinc_strjoin(char *s1, char *s2)
-{
-	char	*s3;
+	char	*line;
+	size_t	y;
 	size_t	i;
 
-	if (!s1)
-	{
-		if(s2)
-			return (ft_strdup(s2));
-		else
-			return (ft_strdup(""));
-	}
-	if (!s2)
-		return (ft_strdup(s1));
-	s3 = malloc (ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!s3)
+	if(!aux)
 		return (NULL);
-	s3 = ft_strjoin(ft_strdup(""), (const char *)s1);
-	s3 = ft_strjoin(s3, s2);
-	i = ft_strlen(s1) + ft_strlen(s2);
-	s3[i] = '\0';
-	return ((char *)s3);
+	y = 0;
+	while (aux[y] && aux[y] != '\n')
+		y++;
+	line = malloc(y + 2);
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (i < y)
+	{
+		line[i] = aux[i];
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
+}
+
+char	*ft_update_aux(char *aux, char *gnl)
+{
+	char	*rest;
+	size_t	i;
+	size_t	k;
+	size_t	o;
+
+	if (!aux || !gnl)
+		return (NULL);
+	i = 0;
+	while (aux[i] && aux[i] != '\n')
+		i++;
+	if (aux[i] == '\n')
+		i++;//nos saltamos el coso
+	k = ft_strlen(aux);
+	rest = malloc(k - i + 1);
+	o = 0;
+	while (gnl[i])
+	{
+		rest[o] = aux[i];
+		i++;
+		o++;
+	}
+	rest[o] = '\0';
+	free(aux);
+	return (rest);
 }
 
 int main ()
@@ -106,5 +113,4 @@ int main ()
 	}
 	close(fd);
 	return 0;
-} 
- */
+}
