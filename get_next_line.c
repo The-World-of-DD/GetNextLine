@@ -6,7 +6,7 @@
 /*   By: dierojas <dierojas@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/08 14:16:56 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:13:45 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,22 @@ char    *get_next_line(int fd)
 	if (!buff)
 		return (NULL);
 	readed = read(fd, buff, BUFFER_SIZE);
-	if (readed <= -1)
+	if (readed < 0)
 		return (free(buff), NULL);
-	//buffer read process and aux fill//
 	while (readed > 0)
 	{
+		buff[readed] = '\0';
 		aux = ft_strjoin(aux, buff);
-		if (ft_strchr(buff, '\n') || EOF)
+		if (ft_strchr(buff, '\n'))
 			break;
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
-	if (!aux)
+	if (!aux || readed == 0)
 		return(NULL);
 	gnl = ft_extract_line(aux);
-	aux = ft_update_aux(aux, gnl);
-	free(buff);
-	free(aux);
+	aux = ft_update_aux(aux);
+	if (readed == EOF)
+		free(buff);
 	return(gnl);
 }
 
@@ -69,24 +69,28 @@ char	*ft_extract_line(char *aux)//dado el parametro de un string, recorta todo l
 	return (line);
 }
 
-char	*ft_update_aux(char *aux, char *gnl)
+char	*ft_update_aux(char *aux)
 {
 	char	*rest;
 	size_t	i;
 	size_t	k;
 	size_t	o;
 
-	if (!aux || !gnl)
+	if (!aux)
 		return (NULL);
 	i = 0;
 	while (aux[i] && aux[i] != '\n')
 		i++;
 	if (aux[i] == '\n')
-		i++;//nos saltamos el coso
+		i++;//nos saltamos el coso en caso de que sea \n
 	k = ft_strlen(aux);
+	if (i >= k)
+		return (free(aux), NULL);
 	rest = malloc(k - i + 1);
+	if (!rest)
+		return (free(aux),(NULL));
 	o = 0;
-	while (gnl[i])
+	while (aux[i])
 	{
 		rest[o] = aux[i];
 		i++;
@@ -106,10 +110,11 @@ int main ()
         return 1;
     }
 	char	*line = get_next_line(fd);
-	if (line)
+	while (line)
 	{
-		printf("%s", line);
+		printf("Linea leida --> %s\n", line);
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return 0;
