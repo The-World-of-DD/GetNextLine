@@ -6,20 +6,21 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/10 09:22:47 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/12 09:38:26 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char    *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	char		*buff;
 	char		*gnl;
 	static char	*aux;
 	ssize_t		readed;
 
-	aux = ft_strdup("");
+	if (!aux)
+		aux = ft_strdup("");
 	if ((BUFFER_SIZE <= 0) || fd < 0)
 		return (NULL);
 	buff = malloc(BUFFER_SIZE + 1);
@@ -36,13 +37,11 @@ char    *get_next_line(int fd)
 			break;
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
-	if (!aux || readed == 0)
-		return(NULL);
+	if (!aux || aux[0] == '\0')
+		return(aux = NULL, free (buff), free(aux), NULL);
 	gnl = ft_extract_line(aux);
 	aux = ft_update_aux(aux);
-	if (readed == EOF)
-		free(buff);
-	return(gnl);
+	return(free(buff), gnl);
 }
 
 char	*ft_extract_line(char *aux)//dado el parametro de un string, recorta todo lo que haya antes de un \n
@@ -56,7 +55,9 @@ char	*ft_extract_line(char *aux)//dado el parametro de un string, recorta todo l
 	y = 0;
 	while (aux[y] && aux[y] != '\n')
 		y++;
-	line = malloc(y + 2);
+	if (aux[y] == '\n')
+		y++;
+	line = malloc(y + 1);
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -88,7 +89,7 @@ char	*ft_update_aux(char *aux)
 		return (free(aux), NULL);
 	rest = malloc(k - i + 1);
 	if (!rest)
-		return (free(aux),(NULL));
+		return (free(aux), NULL);
 	o = 0;
 	while (aux[i])
 	{
@@ -97,10 +98,9 @@ char	*ft_update_aux(char *aux)
 		o++;
 	}
 	rest[o] = '\0';
-	free(aux);
-	return (rest);
+	return (free(aux), rest);
 }
-
+/*
 int main ()
 {
     int fd = open("texto.txt", O_RDONLY);
@@ -112,10 +112,11 @@ int main ()
 	char	*line = get_next_line(fd);
 	while (line)
 	{
-		printf("Linea leida --> %s\n", line);
+		printf("Linea leida --> %s", line);
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
 	return 0;
 }
+*/
