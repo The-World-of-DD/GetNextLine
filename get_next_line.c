@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/12 09:38:26 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:32:34 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_next_line(int fd)
 {
 	char		*buff;
 	char		*gnl;
-	static char	*aux;
+	static char	*aux = NULL;
 	ssize_t		readed;
 
 	if (!aux)
@@ -74,7 +74,6 @@ char	*ft_update_aux(char *aux)
 {
 	char	*rest;
 	size_t	i;
-	size_t	k;
 	size_t	o;
 
 	if (!aux)
@@ -84,10 +83,9 @@ char	*ft_update_aux(char *aux)
 		i++;
 	if (aux[i] == '\n')
 		i++;//nos saltamos el coso en caso de que sea \n
-	k = ft_strlen(aux);
-	if (i >= k)
+	if (i >= ft_strlen(aux))
 		return (free(aux), NULL);
-	rest = malloc(k - i + 1);
+	rest = malloc(ft_strlen(aux) - i + 1);
 	if (!rest)
 		return (free(aux), NULL);
 	o = 0;
@@ -100,7 +98,7 @@ char	*ft_update_aux(char *aux)
 	rest[o] = '\0';
 	return (free(aux), rest);
 }
-/*
+
 int main ()
 {
     int fd = open("texto.txt", O_RDONLY);
@@ -119,4 +117,4 @@ int main ()
 	close(fd);
 	return 0;
 }
-*/
+
