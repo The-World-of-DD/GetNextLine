@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
+/*   By: dierojas <dierojas@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/12 11:51:58 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/12 22:25:04 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_next_line(int fd)
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
 	if (!aux || aux[0] == '\0')
-		return(aux = NULL, free (buff), free(aux), NULL);
+		return(free (buff), free(aux), aux = NULL, NULL);
 	gnl = ft_extract_line(aux);
 	aux = ft_update_aux(aux);
 	return(free(buff), gnl);
@@ -102,7 +102,7 @@ char	*ft_update_aux(char *aux)
 	free(aux);
 	return (rest);
 }
-/*
+
 int main ()
 {
     int fd = open("texto.txt", O_RDONLY);
@@ -121,4 +121,4 @@ int main ()
 	close(fd);
 	return 0;
 }
-*/
+
