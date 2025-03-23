@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 22:11:57 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 22:12:59 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*get_next_line(int fd)
 	return (free(buff), gnl);
 }
 
-int	ft_gettin_next_line(ssize_t readed, char *buff, char *aux, int fd)
+void	ft_gettin_next_line(ssize_t readed, char *buff, char *aux, int fd)
 {
 	char	*new_aux;
 
@@ -54,7 +54,7 @@ int	ft_gettin_next_line(ssize_t readed, char *buff, char *aux, int fd)
 			break ;
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
-	return (0);
+	return ; 
 }
 
 char	*ft_extract_line(char *aux)
