@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 22:59:48 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 23:01:17 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_next_line(int fd)
 	aux = ft_update_aux(aux);
 	return (gnl);
 }
-char *fr_aux_reading(int fd, char *aux)
+char *ft_aux_reading(int fd, char *aux)
 {
 	char	*buff;
 	ssize_t	readed;
