@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 21:41:00 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 21:50:42 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*get_next_line(int fd)
 	char		*gnl;
 	static char	*aux = NULL;
 	ssize_t		readed;
+	char		*new_aux;
 
 	if (!aux)
 		aux = ft_strdup("");
@@ -32,20 +33,20 @@ char	*get_next_line(int fd)
 	while (readed > 0)
 	{
 		buff[readed] = '\0';
-		char	*new_aux = ft_strjoin(aux, buff);
+		new_aux = ft_strjoin(aux, buff);
 		if (!new_aux)
 			return (free(buff), free(aux), aux = NULL, NULL);
 		free(aux);
 		aux = new_aux;
 		if (ft_strchr(buff, '\n'))
-			break;
+			break ;
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
 	if (!aux || aux[0] == '\0')
-		return(free (buff), free(aux), aux = NULL, NULL);
+		return (free (buff), free(aux), aux = NULL, NULL);
 	gnl = ft_extract_line(aux);
 	aux = ft_update_aux(aux);
-	return(free(buff), gnl);
+	return (free(buff), gnl);
 }
 
 char	*ft_extract_line(char *aux)
@@ -54,7 +55,7 @@ char	*ft_extract_line(char *aux)
 	size_t	y;
 	size_t	i;
 
-	if(!aux)
+	if (!aux)
 		return (NULL);
 	y = 0;
 	while (aux[y] && aux[y] != '\n')
