@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 21:50:42 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 22:06:54 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	*get_next_line(int fd)
 	char		*gnl;
 	static char	*aux = NULL;
 	ssize_t		readed;
-	char		*new_aux;
 
 	if (!aux)
 		aux = ft_strdup("");
@@ -30,6 +29,19 @@ char	*get_next_line(int fd)
 	readed = read(fd, buff, BUFFER_SIZE);
 	if (readed < 0)
 		return (free(buff), free(aux), aux = NULL, NULL);
+	ft_gettin_next_line(readed, buff, aux, fd);
+	if (!aux || aux[0] == '\0')
+		return (free (buff), free(aux), aux = NULL, NULL);
+	gnl = ft_extract_line(aux);
+	aux = ft_update_aux(aux);
+	return (free(buff), gnl);
+}
+
+void	ft_gettin_next_line(ssize_t readed, char *buff, char *aux, int fd)
+{
+	char	*new_aux;
+
+	new_aux = ft_strdup("");
 	while (readed > 0)
 	{
 		buff[readed] = '\0';
@@ -42,11 +54,6 @@ char	*get_next_line(int fd)
 			break ;
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
-	if (!aux || aux[0] == '\0')
-		return (free (buff), free(aux), aux = NULL, NULL);
-	gnl = ft_extract_line(aux);
-	aux = ft_update_aux(aux);
-	return (free(buff), gnl);
 }
 
 char	*ft_extract_line(char *aux)
@@ -101,10 +108,10 @@ char	*ft_update_aux(char *aux)
 		o++;
 	}
 	rest[o] = '\0';
-	free(aux);
-	return (rest);
+	return (free(aux), rest);
 }
 /*
+# include <stdio.h>
 int main ()
 {
     int fd = open("texto.txt", O_RDONLY);
