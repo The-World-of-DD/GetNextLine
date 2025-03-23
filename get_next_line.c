@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 22:34:10 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 22:37:47 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*get_next_line(int fd)
 	char		*buff;
 	char		*gnl;
 	static char	*aux = NULL;
+	ssize_t		readed;
+	char		*new_aux;
 
 	if (!aux)
 		aux = ft_strdup("");
@@ -25,35 +27,26 @@ char	*get_next_line(int fd)
 	buff = malloc(BUFFER_SIZE + 1);
 	if (!buff)
 		return (NULL);
-	aux = ft_getting_next_line(aux, buff, fd);
-	if (!aux || aux[0] == '\0')
-		return (ft_errors_avoid(&aux, buff));
-	gnl = ft_extract_line(aux);
-	aux = ft_update_aux(aux);
-	return (free(buff), gnl);
-}
-
-char	*ft_getting_next_line(char *aux, char *buff, int fd)
-{
-	ssize_t	readed;
-	char	*new_aux;
-
 	readed = read(fd, buff, BUFFER_SIZE);
+	if (readed < 0)
+		return (free(buff), free(aux), aux = NULL, NULL);
 	while (readed > 0)
 	{
 		buff[readed] = '\0';
 		new_aux = ft_strjoin(aux, buff);
 		if (!new_aux)
-			return (ft_errors_avoid(&aux, buff));
+			return (free(buff), free(aux), aux = NULL, NULL);
 		free(aux);
 		aux = new_aux;
 		if (ft_strchr(buff, '\n'))
 			break ;
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
-	if (readed < 0)
-		return (ft_errors_avoid(&aux, buff));
-	return (aux);
+	if (!aux || aux[0] == '\0')
+		return (free (buff), free(aux), aux = NULL, NULL);
+	gnl = ft_extract_line(aux);
+	aux = ft_update_aux(aux);
+	return (free(buff), gnl);
 }
 
 char	*ft_extract_line(char *aux)
@@ -109,14 +102,6 @@ char	*ft_update_aux(char *aux)
 	}
 	rest[o] = '\0';
 	return (free(aux), rest);
-}
-
-char	*ft_errors_avoid(char **aux, char *buff)
-{
-	free(buff);
-	free(*aux);
-	*aux = NULL;
-	return (NULL);
 }
 /*
 # include <stdio.h>
