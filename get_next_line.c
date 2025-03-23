@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 21:16:57 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 21:17:28 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_next_line(int fd)
 	char		*buff;
 	char		*gnl;
 	static char	*aux;
-	char		*new_aux;
+//	char		*new_aux;
 	ssize_t		readed;
 
 	aux = NULL;
