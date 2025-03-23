@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 22:23:27 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 22:31:28 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_getting_next_line(char *aux, char *buff, int fd)
 		buff[readed] = '\0';
 		new_aux = ft_strjoin(aux, buff);
 		if (!new_aux)
-			return (free (buff), free(aux), aux = NULL, NULL);
+			return (ft_errors_avoid(&aux, buff));
 		free(aux);
 		aux = new_aux;
 		if (ft_strchr(buff, '\n'))
@@ -52,7 +52,7 @@ char	*ft_getting_next_line(char *aux, char *buff, int fd)
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
 	if (readed < 0)
-		return (free (buff), free(aux), aux = NULL, NULL);
+		return (ft_errors_avoid(&aux, buff));
 	return (aux);
 }
 
@@ -109,6 +109,14 @@ char	*ft_update_aux(char *aux)
 	}
 	rest[o] = '\0';
 	return (free(aux), rest);
+}
+
+char	*ft_errors_avoid(char **aux, char *buff)
+{
+	free(buff);
+	free(*aux);
+	*aux = NULL;
+	return (NULL);
 }
 /*
 # include <stdio.h>
