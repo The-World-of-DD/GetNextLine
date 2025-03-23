@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 21:13:26 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 21:14:21 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*ft_update_aux(char *aux)
 	return (rest);
 }
 
-int main ()
+/* int main ()
 {
     int fd = open("texto.txt", O_RDONLY);
     if (fd < 0)
@@ -123,4 +123,4 @@ int main ()
 	}
 	close(fd);
 	return 0;
-}
+} */
