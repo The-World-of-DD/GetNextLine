@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 22:13:16 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 23:21:43 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char *ft_aux_reading(int fd, char *aux)
 	if (!buff)
 		return (NULL);
 	readed = read(fd, buff, BUFFER_SIZE);
+	if (readed < 0)
+		return (free(buff), free(aux), aux = NULL, NULL);
 	while (readed > 0)
 	{
 		buff[readed] = '\0';
