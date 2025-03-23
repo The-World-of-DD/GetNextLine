@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 21:14:21 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 21:16:31 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,18 @@ char	*get_next_line(int fd)
 	while (readed > 0)
 	{
 		buff[readed] = '\0';
-		new_aux = ft_strjoin(aux, buff);
-		free(aux);
-		aux = new_aux;
+		//new_aux = ft_strjoin(aux, buff);
+		//free(aux);
+		//aux = new_aux;
+		aux = ft_strjoin(aux, buff);
 		if (ft_strchr(buff, '\n'))
 			break;
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
 	if (!aux || aux[0] == '\0')
 		return(free (buff), free(aux), aux = NULL, NULL);
-	gnl = ft_extract_line(new_aux);
-	aux = ft_update_aux(new_aux);
+	gnl = ft_extract_line(aux);
+	aux = ft_update_aux(aux);
 	if (readed < 0)
 		free(aux);
 	return(free(buff), gnl);
@@ -106,7 +107,7 @@ char	*ft_update_aux(char *aux)
 	return (rest);
 }
 
-/* int main ()
+int main ()
 {
     int fd = open("texto.txt", O_RDONLY);
     if (fd < 0)
@@ -123,4 +124,4 @@ char	*ft_update_aux(char *aux)
 	}
 	close(fd);
 	return 0;
-} */
+}
