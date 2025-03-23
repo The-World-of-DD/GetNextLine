@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:29 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 22:24:16 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 22:32:02 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char	*ft_strdup(const char *s1);
 char	*ft_extract_line(char *aux);
 char	*ft_update_aux(char *aux);
 char	*ft_getting_next_line(char *aux, char *buff, int fd);
+char	*ft_errors_avoid(char **aux, char *buff);
 
 #endif
