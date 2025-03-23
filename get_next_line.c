@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 21:27:21 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 21:41:00 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char	*get_next_line(int fd)
 			return (free(buff), free(aux), aux = NULL, NULL);
 		free(aux);
 		aux = new_aux;
-		//aux = ft_strjoin(aux, buff);
 		if (ft_strchr(buff, '\n'))
 			break;
 		readed = read(fd, buff, BUFFER_SIZE);
@@ -49,7 +48,7 @@ char	*get_next_line(int fd)
 	return(free(buff), gnl);
 }
 
-char	*ft_extract_line(char *aux)//dado el parametro de un string, recorta todo lo que haya antes de un \n
+char	*ft_extract_line(char *aux)
 {
 	char	*line;
 	size_t	y;
@@ -87,7 +86,7 @@ char	*ft_update_aux(char *aux)
 	while (aux[i] && aux[i] != '\n')
 		i++;
 	if (aux[i] == '\n')
-		i++;//nos saltamos el coso en caso de que sea \n
+		i++;
 	if (i >= ft_strlen(aux))
 		return (free(aux), NULL);
 	rest = malloc(ft_strlen(aux) - i + 1);
