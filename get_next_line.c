@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 21:19:22 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 21:20:34 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ char	*get_next_line(int fd)
 {
 	char		*buff;
 	char		*gnl;
-	static char	*aux;
-	char		*new_aux;
+	static char	*aux = NULL;
 	ssize_t		readed;
 
-	aux = NULL;
 	if (!aux)
 		aux = ft_strdup("");
 	if ((BUFFER_SIZE <= 0) || fd < 0)
@@ -34,9 +32,10 @@ char	*get_next_line(int fd)
 	while (readed > 0)
 	{
 		buff[readed] = '\0';
-		new_aux = ft_strjoin(aux, buff);
+		char	*new_aux = ft_strjoin(aux, buff);
 		free(aux);
 		aux = new_aux;
+		//aux = ft_strjoin(aux, buff);
 		if (ft_strchr(buff, '\n'))
 			break;
 		readed = read(fd, buff, BUFFER_SIZE);
@@ -122,4 +121,4 @@ int main ()
 	close(fd);
 	return 0;
 }
-*/
+/**/
