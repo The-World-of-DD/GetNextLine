@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 23:21:43 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 23:22:15 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,31 +131,3 @@ int main ()
 	return 0;
 }
 */
-
-TEST("read_error.txt", {
-	char *name = "read_error.txt";
-	int fd = open(name, O_RDONLY);
-	/* 1 */ test_gnl(fd, "aaaaaaaaaa\n");
-	/* 2 */ test_gnl(fd, "bbbbbbbbbb\n");
-	// set the next read call to return -1
-	next_read_error = 1;
-	if (BUFFER_SIZE > 100) {
-		char *temp;
-		do {
-			temp = get_next_line(fd);
-			free(temp);
-		} while (temp != NULL);
-	}
-	/* 3 */ test_gnl(fd, NULL);
-	next_read_error = 0;
-	close(fd);
-	fd = open(name, O_RDONLY);
-	/* 4 */ test_gnl(fd, "aaaaaaaaaa\n");
-	/* 5 */ test_gnl(fd, "bbbbbbbbbb\n");
-	/* 6 */ test_gnl(fd, "cccccccccc\n");
-	/* 7 */ test_gnl(fd, "dddddddddd\n");
-	/* 8 */ test_gnl(fd, NULL);
-	if (res != 1) {
-		fprintf(errors_file, YEL "Probable reason" NC ": You should clear the static buffer when a call to read returns -1\n");
-	}
-});
