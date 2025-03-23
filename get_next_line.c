@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 20:23:46 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 21:13:26 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ char	*get_next_line(int fd)
 {
 	char		*buff;
 	char		*gnl;
-	static char	*aux = NULL;
+	static char	*aux;
+	char		*new_aux;
 	ssize_t		readed;
 
+	aux = NULL;
 	if (!aux)
 		aux = ft_strdup("");
 	if ((BUFFER_SIZE <= 0) || fd < 0)
@@ -32,18 +34,19 @@ char	*get_next_line(int fd)
 	while (readed > 0)
 	{
 		buff[readed] = '\0';
-		char	*new_aux = ft_strjoin(aux, buff);
+		new_aux = ft_strjoin(aux, buff);
 		free(aux);
 		aux = new_aux;
-		//aux = ft_strjoin(aux, buff);
 		if (ft_strchr(buff, '\n'))
 			break;
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
 	if (!aux || aux[0] == '\0')
 		return(free (buff), free(aux), aux = NULL, NULL);
-	gnl = ft_extract_line(aux);
-	aux = ft_update_aux(aux);
+	gnl = ft_extract_line(new_aux);
+	aux = ft_update_aux(new_aux);
+	if (readed < 0)
+		free(aux);
 	return(free(buff), gnl);
 }
 
@@ -102,7 +105,7 @@ char	*ft_update_aux(char *aux)
 	free(aux);
 	return (rest);
 }
-/*
+
 int main ()
 {
     int fd = open("texto.txt", O_RDONLY);
@@ -121,4 +124,3 @@ int main ()
 	close(fd);
 	return 0;
 }
-*/
