@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 22:37:47 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 22:55:19 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,44 @@
 
 char	*get_next_line(int fd)
 {
-	char		*buff;
 	char		*gnl;
 	static char	*aux = NULL;
-	ssize_t		readed;
-	char		*new_aux;
 
-	if (!aux)
-		aux = ft_strdup("");
 	if ((BUFFER_SIZE <= 0) || fd < 0)
 		return (NULL);
+	if (!aux)
+		aux = ft_strdup("");
+	aux = ft_aux_reading(fd, aux);
+	if (!aux || aux[0] == '\0')
+		return (free(aux), aux = NULL, NULL);
+	gnl = ft_extract_line(aux);
+	aux = ft_update_aux(aux);
+	return (gnl);
+}
+char *read_to_aux(int fd, char *aux)
+{
+	char	*buff;
+	ssize_t	readed;
+	char	*new_aux;
+
 	buff = malloc(BUFFER_SIZE + 1);
 	if (!buff)
 		return (NULL);
 	readed = read(fd, buff, BUFFER_SIZE);
-	if (readed < 0)
-		return (free(buff), free(aux), aux = NULL, NULL);
 	while (readed > 0)
 	{
 		buff[readed] = '\0';
 		new_aux = ft_strjoin(aux, buff);
 		if (!new_aux)
-			return (free(buff), free(aux), aux = NULL, NULL);
+			return (free(buff), free(aux), NULL);
 		free(aux);
 		aux = new_aux;
 		if (ft_strchr(buff, '\n'))
-			break ;
+			break;
 		readed = read(fd, buff, BUFFER_SIZE);
 	}
-	if (!aux || aux[0] == '\0')
-		return (free (buff), free(aux), aux = NULL, NULL);
-	gnl = ft_extract_line(aux);
-	aux = ft_update_aux(aux);
-	return (free(buff), gnl);
+	free(buff);
+	return (aux);
 }
 
 char	*ft_extract_line(char *aux)
