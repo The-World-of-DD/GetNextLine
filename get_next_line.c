@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dierojas <dierojas@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/12 22:25:04 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/03/23 20:23:46 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char	*ft_update_aux(char *aux)
 	free(aux);
 	return (rest);
 }
-
+/*
 int main ()
 {
     int fd = open("texto.txt", O_RDONLY);
@@ -121,4 +121,4 @@ int main ()
 	close(fd);
 	return 0;
 }
-
+*/
