@@ -6,7 +6,7 @@
 *.a
 *.so
 *.dll
-*.ghc
+*.h.ghc
 
 # Debug files
 *.dSYM/
