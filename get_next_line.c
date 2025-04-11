@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/23 23:25:29 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/12 00:12:51 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*get_next_line(int fd)
 
 	if ((BUFFER_SIZE <= 0) || fd < 0)
 		return (NULL);
-	if (!aux)
-		aux = ft_strdup("");
+	if (!aux && !(aux = ft_strdup("")))
+		return (NULL);
 	aux = ft_aux_reading(fd, aux);
 	if (!aux || aux[0] == '\0')
 		return (free(aux), aux = NULL, NULL);
