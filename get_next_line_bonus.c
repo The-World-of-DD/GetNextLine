@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/24 13:42:19 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/12 00:28:43 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 char	*get_next_line(int fd)
 {
 	char		*gnl;
-	static char	*aux = NULL;
+	static char	*aux[MAX_FD];
 
-	if ((BUFFER_SIZE <= 0) || fd < 0)
+	if ((BUFFER_SIZE <= 0) || fd < 0 || fd >= MAX_FD)
 		return (NULL);
-	if (!aux)
-		aux = ft_strdup("");
-	aux = ft_aux_reading(fd, aux);
-	if (!aux || aux[0] == '\0')
-		return (free(aux), aux = NULL, NULL);
+	if (!aux[fd])
+		aux[fd] = ft_strdup("");
+	aux[fd] = ft_aux_reading(fd, aux[fd]);
+	if (!aux[fd] || aux[0] == '\0')
+		return (free(aux), aux[fd] = NULL, NULL);
 	gnl = ft_extract_line(aux);
-	aux = ft_update_aux(aux);
+	aux[fd] = ft_update_aux(aux);
 	return (gnl);
 }
 

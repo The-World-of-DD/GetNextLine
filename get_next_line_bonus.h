@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:29 by dierojas          #+#    #+#             */
-/*   Updated: 2025/03/24 13:42:42 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/12 00:25:57 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+
+# ifndef MAX_FD
+#  define MAX_FD 1024
+# endif
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
