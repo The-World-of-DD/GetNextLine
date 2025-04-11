@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/04/12 00:54:16 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/12 00:56:19 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	*ft_update_aux(char *aux)
 	rest[o] = '\0';
 	return (free(aux), rest);
 }
-
+/*
 # include <stdio.h>
 int main ()
 {
@@ -140,3 +140,4 @@ int main ()
 	close(fd2);
 	return 0;
 }
+*/
