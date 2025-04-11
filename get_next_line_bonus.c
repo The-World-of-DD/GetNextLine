@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/04/12 00:28:43 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/12 00:30:00 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ char	*get_next_line(int fd)
 	if (!aux[fd])
 		aux[fd] = ft_strdup("");
 	aux[fd] = ft_aux_reading(fd, aux[fd]);
-	if (!aux[fd] || aux[0] == '\0')
-		return (free(aux), aux[fd] = NULL, NULL);
-	gnl = ft_extract_line(aux);
-	aux[fd] = ft_update_aux(aux);
+	if (!aux[fd] || aux[fd][0] == '\0')
+		return (free(aux[fd]), aux[fd] = NULL, NULL);
+	gnl = ft_extract_line(aux[fd]);
+	aux[fd] = ft_update_aux(aux[fd]);
 	return (gnl);
 }
 
