@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/04/12 00:30:00 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/12 00:54:16 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,24 +111,32 @@ char	*ft_update_aux(char *aux)
 	rest[o] = '\0';
 	return (free(aux), rest);
 }
-/*
+
 # include <stdio.h>
 int main ()
 {
-    int fd = open("texto.txt", O_RDONLY);
-    if (fd < 0)
+    int fd1 = open("texto.txt", O_RDONLY);
+	int fd2 = open("texto2.txt", O_RDONLY);
+    if (fd1 < 0 || fd2 < 0)
     {
         perror("Error al abrir el archivo");
         return 1;
     }
-	char	*line = get_next_line(fd);
+	char	*line = get_next_line(fd1);
+	char	*line2 = get_next_line(fd2);
 	while (line)
 	{
 		printf("Linea leida --> %s", line);
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd1);
 	}
-	close(fd);
+	while (line2)
+	{
+		printf("Linea leida --> %s", line2);
+		free(line2);
+		line2 = get_next_line(fd2);
+	}
+	close(fd1);
+	close(fd2);
 	return 0;
 }
-*/
