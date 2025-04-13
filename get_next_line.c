@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/04/13 15:13:00 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/13 17:37:23 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_aux_reading(int fd, char *aux)
 		aux = new_aux;
 		if (ft_strchr(buff, '\n'))
 			break ;
-		readed = read(fd, buff, BUFFER_SIZE);
+		readed = read(fd, buff, BUFFER_SIZE);//no termino de entender por que haciamos esto...
 	}
 	free(buff);
 	return (aux);
@@ -80,7 +80,7 @@ char	*ft_extract_line(char *aux)
 		i++;
 	}
 	line[i] = '\0';
-	return (free(aux), line);
+	return (line);
 }
 
 char	*ft_update_aux(char *aux)
