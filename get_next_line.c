@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/04/12 18:15:13 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/13 15:13:00 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*ft_extract_line(char *aux)
 		i++;
 	}
 	line[i] = '\0';
-	return (line);
+	return (free(aux), line);
 }
 
 char	*ft_update_aux(char *aux)
