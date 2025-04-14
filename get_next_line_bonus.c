@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/04/14 14:23:28 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:29:08 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,34 +29,6 @@ char	*get_next_line(int fd)
 	return (gnl);
 }
 
-char	*ft_aux_reading(int fd, char *aux)
-{
-	char	*buff;
-	ssize_t	readed;
-	char	*new_aux;
-
-	buff = malloc(BUFFER_SIZE + 1);
-	if (!buff)
-		return (NULL);
-	readed = read(fd, buff, BUFFER_SIZE);
-	if (readed < 0)
-		return (free(buff), free(aux), aux = NULL, NULL);
-	while (readed > 0)
-	{
-		buff[readed] = '\0';
-		new_aux = ft_strjoin(aux, buff);
-		if (!new_aux)
-			return (free(buff), free(aux), NULL);
-		free(aux);
-		aux = new_aux;
-		if (ft_strchr(buff, '\n'))
-			break ;
-		readed = read(fd, buff, BUFFER_SIZE);
-	}
-	free(buff);
-	return (aux);
-}
-
 char	*ft_extract_line(char *aux)
 {
 	char	*line;
@@ -72,7 +44,7 @@ char	*ft_extract_line(char *aux)
 		y++;
 	line = malloc(y + 1);
 	if (!line)
-		return (NULL);
+		return (free(aux), NULL);
 	i = 0;
 	while (i < y)
 	{
@@ -97,10 +69,10 @@ char	*ft_update_aux(char *aux)
 	if (aux[i] == '\n')
 		i++;
 	if (i >= ft_strlen(aux))
-		return (NULL);
+		return (free(aux), NULL);
 	rest = malloc(ft_strlen(aux) - i + 1);
 	if (!rest)
-		return (NULL);
+		return (free(aux), NULL);
 	o = 0;
 	while (aux[i])
 	{
@@ -109,7 +81,7 @@ char	*ft_update_aux(char *aux)
 		o++;
 	}
 	rest[o] = '\0';
-	return (rest);
+	return (free(aux), rest);
 }
 /* 
 # include <stdio.h>
