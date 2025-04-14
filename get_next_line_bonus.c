@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/04/14 13:59:33 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:13:22 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ char	*ft_update_aux(char *aux)
 	if (aux[i] == '\n')
 		i++;
 	if (i >= ft_strlen(aux))
-		return (free(aux), NULL);
+		return (NULL);
 	rest = malloc(ft_strlen(aux) - i + 1);
 	if (!rest)
-		return (free(aux), NULL);
+		return (NULL);
 	o = 0;
 	while (aux[i])
 	{
@@ -109,7 +109,7 @@ char	*ft_update_aux(char *aux)
 		o++;
 	}
 	rest[o] = '\0';
-	return (rest);
+	return (free(aux), rest);
 }
 /* 
 # include <stdio.h>
