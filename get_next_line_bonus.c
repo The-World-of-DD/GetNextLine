@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/04/14 14:39:20 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:40:46 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 
 	if ((BUFFER_SIZE <= 0) || fd < 0 || fd >= MAX_FD)
 		return (NULL);
-	if (!aux)
+	if (!aux[fd])
 		aux[fd] = ft_strdup("");
 	aux[fd] = ft_aux_reading(fd, aux[fd]);
 	if (!aux[fd] || aux[fd][0] == '\0')
