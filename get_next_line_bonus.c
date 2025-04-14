@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:33:01 by dierojas          #+#    #+#             */
-/*   Updated: 2025/04/14 14:20:23 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:23:28 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*ft_update_aux(char *aux)
 		o++;
 	}
 	rest[o] = '\0';
-	return (free(aux), rest);
+	return (rest);
 }
 /* 
 # include <stdio.h>
