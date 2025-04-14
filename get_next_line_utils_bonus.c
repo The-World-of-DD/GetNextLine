@@ -6,12 +6,11 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 21:35:08 by dierojas          #+#    #+#             */
-/*   Updated: 2025/04/14 14:25:09 by dierojas         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:26:09 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
 
 size_t	ft_strlen(const char *str)
 {
