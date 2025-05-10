@@ -1,5 +1,5 @@
 #!/bin/bash
-{
+
 echo "#Architecture: $(uname -a | sed 's/ PREEMPT_DYNAMIC//')" |
 echo "#CPU physical : $(lscpu | grep 'Sockets(s)' | awk '{print $2}')"
 echo "vCPU : $(nproc)"
@@ -12,4 +12,5 @@ echo "#TCP Connections : $(netstat -ant | grep ESTABLISHED | wc -l) ESTABLISHED"
 echo "#User log : $(who | wc -l)"
 echo "#Network : IP $(ifconfig | awk 'NR == 2'{print $2}) $(ifconfig | awk 'NR == 5 {printf "(%s)", $2}')"
 echo "#Sudo : $(grep 'sudo' /var/log/sudo.log | wc -l) cmd"
-} | wall
+
+#We add the < | wall > in crontab
